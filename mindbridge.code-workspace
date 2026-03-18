@@ -1,0 +1,75 @@
+{
+  "folders": [
+    { "name": "🖥 Backend",  "path": "./backend"  },
+    { "name": "🎨 Frontend", "path": "./frontend" }
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "emmet.includeLanguages": { "javascript": "javascriptreact" },
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/.git": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/dist": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "bradlc.vscode-tailwindcss",
+      "mongodb.mongodb-vscode",
+      "pkief.material-icon-theme"
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Backend (Node.js)",
+        "type": "node",
+        "request": "launch",
+        "program": "${workspaceFolder:🖥 Backend}/src/server.js",
+        "envFile": "${workspaceFolder:🖥 Backend}/.env",
+        "restart": true,
+        "console": "integratedTerminal"
+      }
+    ],
+    "compounds": [
+      {
+        "name": "Full Stack",
+        "configurations": ["Backend (Node.js)"]
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "▶ Start Backend",
+        "type": "shell",
+        "command": "npm run dev",
+        "options": { "cwd": "${workspaceFolder:🖥 Backend}" },
+        "group": "build",
+        "presentation": { "panel": "dedicated", "reveal": "always" }
+      },
+      {
+        "label": "▶ Start Frontend",
+        "type": "shell",
+        "command": "npm run dev",
+        "options": { "cwd": "${workspaceFolder:🎨 Frontend}" },
+        "group": "build",
+        "presentation": { "panel": "dedicated", "reveal": "always" }
+      },
+      {
+        "label": "🚀 Start All",
+        "dependsOn": ["▶ Start Backend", "▶ Start Frontend"],
+        "group": { "kind": "build", "isDefault": true }
+      }
+    ]
+  }
+}
