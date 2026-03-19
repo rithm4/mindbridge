@@ -78,9 +78,9 @@ export const useWebRTC = ({ roomId, userId, userName }) => {
       localStreamRef.current = stream;
       setLocalStream(stream);
 
-      const socket = io(import.meta.env.VITE_SOCKET_URL || '', {
-        auth: { token: localStorage.getItem('accessToken') },
-        transports: ['websocket'],
+      const socket = io(import.meta.env.VITE_SOCKET_URL || window.location.origin, {
+        transports: ['websocket', 'polling'],
+        reconnection: true,
       });
       socketRef.current = socket;
 
